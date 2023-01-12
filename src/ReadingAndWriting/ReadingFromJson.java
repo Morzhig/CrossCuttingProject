@@ -26,7 +26,6 @@ public class ReadingFromJson {
 
         fw.write(new Gson().toJson(result));
 
-        System.out.println("Succeed, check output.json.");
         fw.close();
     }
 }

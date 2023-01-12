@@ -5,7 +5,7 @@ import java.util.zip.*;
 
 public class ZipFiles {
 
-    public void write_to_zip(String filename){
+    public void write_to_zip(String filename) {
         String zipname = filename.replace("txt", "zip");
 
         try(ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(zipname));

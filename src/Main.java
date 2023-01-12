@@ -1,7 +1,11 @@
 import Archives.ZipFiles;
 import ReadingAndWriting.ReadingFromJson;
 import ReadingAndWriting.ReadingFromTxt;
+import ReadingAndWriting.ReadingFromXML;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 import java.io.IOException;
 
 public class Main {
@@ -14,7 +18,11 @@ public class Main {
     private static final String JsonInputFileName = "input.json";
     private static final String JsonOutputFileName = "output.json";
 
-    public static void main(String[] args) throws IOException {
+    private static final String XMLInputFileName = "input.xml";
+    private static final String XMLOutputFileName = "output.xml";
+
+
+    public static void main(String[] args) throws IOException, ParserConfigurationException, SAXException, TransformerException {
         System.out.println("Checking Reading and Writing abilities...");
 
         System.out.println("\nChecking Reading and Writing abilities of TXT...");
@@ -31,12 +39,12 @@ public class Main {
         rfj.read(JsonInputFileName);
         rfj.write(JsonOutputFileName);
 
-//        System.out.println("\nChecking Reading and Writing abilities of XML...");
-//
-//        ReadingFromXML rfXML = new ReadingFromXML();
-//
-//        rfXML.read(XMLInputFileName);
-//        rfXML.write(XMLOutputFileName);
+        System.out.println("\nChecking Reading and Writing abilities of XML...");
+
+        ReadingFromXML rfXML = new ReadingFromXML();
+
+        rfXML.read(XMLInputFileName);
+        rfXML.write(XMLOutputFileName);
 
         System.out.println("\nChecking Zip-archieving...");
 

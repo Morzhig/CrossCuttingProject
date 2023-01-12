@@ -26,7 +26,6 @@ public class ReadingFromTxt {
 
         fw.write(result);
 
-        System.out.println("Succeed, check output.txt.");
         fw.close();
     }
 }
