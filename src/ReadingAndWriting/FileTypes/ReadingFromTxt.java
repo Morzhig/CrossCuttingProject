@@ -1,30 +1,28 @@
-package ReadingAndWriting;
+package ReadingAndWriting.FileTypes;
+
+import ReadingAndWriting.Interfaces.ReadingAndWriting;
 
 import java.util.Scanner;
 import java.io.*;
-public class ReadingFromTxt {
-    String result;
+public class ReadingFromTxt implements ReadingAndWriting {
+    public String result = "";
 
-    public ReadingFromTxt(){
-        result="";
-    }
-
+    @Override
     public void read(String file_name) throws IOException {
         FileReader fr = new FileReader(file_name);
         Scanner in = new Scanner(fr);
 
-        while(in.hasNextLine()){
+        while(in.hasNextLine())
             result = result.concat(in.nextLine());
-            result = result.concat("\n");
-        }
 
         in.close();
     }
 
-    public void write(String file_name) throws IOException {
+    @Override
+    public void write(String file_name, String text) throws IOException {
         FileWriter fw = new FileWriter(file_name);
 
-        fw.write(result);
+        fw.write(text);
 
         fw.close();
     }

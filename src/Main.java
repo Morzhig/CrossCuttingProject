@@ -1,56 +1,151 @@
 import Archives.ZipFiles;
-import ReadingAndWriting.ReadingFromJson;
-import ReadingAndWriting.ReadingFromTxt;
-import ReadingAndWriting.ReadingFromXML;
-import org.xml.sax.SAXException;
+import Encryption.CipherFileEncoder;
+import ReadingAndWriting.FileTypes.ReadingFromJson;
+import ReadingAndWriting.FileTypes.ReadingFromTxt;
+import ReadingAndWriting.FileTypes.ReadingFromXML;
 
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerException;
-import java.io.IOException;
+import java.io.File;
+import java.util.Scanner;
 
 public class Main {
-    private static final String FileToZipName = "Zip_Test.txt";
-    private static final String ZipToFileName = "File_Test.zip";
-
-    private static final String TxtInputFileName = "input.txt";
     private static final String TxtOutputFileName = "output.txt";
 
-    private static final String JsonInputFileName = "input.json";
     private static final String JsonOutputFileName = "output.json";
 
-    private static final String XMLInputFileName = "input.xml";
     private static final String XMLOutputFileName = "output.xml";
 
+    private static final String encKey = "1234567890123456";
 
-    public static void main(String[] args) throws IOException, ParserConfigurationException, SAXException, TransformerException {
-        System.out.println("Checking Reading and Writing abilities...");
 
-        System.out.println("\nChecking Reading and Writing abilities of TXT...");
+    public static void main(String[] args) throws Exception {
+        Scanner in = new Scanner(System.in);
 
-        ReadingFromTxt rft = new ReadingFromTxt();
+        String path;
+        int key;
 
-        rft.read(TxtInputFileName);
-        rft.write(TxtOutputFileName);
+        System.out.println("Welcome to Console UI this project!");
 
-        System.out.println("\nChecking Reading and Writing abilities of JSON...");
+        while (true) {
+            System.out.println("""
+                    Here are some features for you to see:
+                    Reading and writing files - 1;
+                    Archiving and unarchiving zip files - 2;
+                    Encrypting and decrypting files - 3;
+                    Leave - 4.""");
 
-        ReadingFromJson rfj = new ReadingFromJson();
+            key = in.nextInt();
 
-        rfj.read(JsonInputFileName);
-        rfj.write(JsonOutputFileName);
+            if (key == 4)
+                break;
 
-        System.out.println("\nChecking Reading and Writing abilities of XML...");
+            if (key == 1) {
+                while (true) {
+                    System.out.println("\nProcessing Reading and Writing");
+                    System.out.println("""
+                            What type of files you would like to work with:\s
+                            Txt - 1
+                            JSON - 2
+                            XML - 3
+                            Get back - 4""");
 
-        ReadingFromXML rfXML = new ReadingFromXML();
+                    key = in.nextInt();
 
-        rfXML.read(XMLInputFileName);
-        rfXML.write(XMLOutputFileName);
+                    if (key == 4)
+                        break;
 
-        System.out.println("\nChecking Zip-archieving...");
+                    if (key == 1) {
+                        System.out.println("\nProcessing Reading and Writing of TXT...");
+                        System.out.println("Enter path to a file you want to read: ");
+                        path = in.next();
+                        ReadingFromTxt rft = new ReadingFromTxt();
+                        rft.read(path);
+                        System.out.println("Result of reading input.txt is: " + rft.result);
 
-        ZipFiles zf = new ZipFiles();
+                        System.out.println("What would you like to write into output.txt: ");
+                        rft.write(TxtOutputFileName, in.next());
+                    }
 
-        zf.write_to_zip(FileToZipName);
-        zf.read_from_zip(ZipToFileName);
+                    if (key == 2) {
+                        System.out.println("\nChecking Reading and Writing of JSON...");
+                        System.out.println("Enter path to a file you want to read: ");
+                        path = in.next();
+                        ReadingFromJson rfj = new ReadingFromJson();
+                        rfj.read(path);
+                        System.out.println("Result of reading input.json is: " + rfj.result);
+
+                        System.out.println("What would you like to write into output.json: ");
+                        rfj.write(JsonOutputFileName, in.next());
+                    }
+
+                    if (key == 3) {
+                        System.out.println("\nChecking Reading and Writing of XML...");
+                        System.out.println("Enter path to a file you want to read: ");
+                        path = in.next();
+                        ReadingFromXML rfXML = new ReadingFromXML();
+                        rfXML.read(path);
+                        System.out.println("Result of reading input.txt is: " + rfXML.result);
+
+                        System.out.println("What would you like to write into output.xml: ");
+                        rfXML.write(XMLOutputFileName, in.next());
+                    }
+                }
+
+                if (key == 2) {
+                    while (true) {
+                        System.out.println("\nProcessing Zip-archiving...");
+                        System.out.println("""
+                                What exactly do you need:\s
+                                Archive - 1;
+                                Dearchive - 2;
+                                Get back - 3.""");
+
+                        key = in.nextInt();
+
+                        if (key == 3)
+                            break;
+
+                        ZipFiles zf = new ZipFiles();
+
+                        if (key == 1) {
+                            System.out.println("Enter path to a file you want to archive: ");
+                            path = in.next();
+                            zf.archive(path);
+                        }
+
+                        if (key == 2) {
+                            System.out.println("Enter path to a file you want to unarchive: ");
+                            path = in.next();
+                            zf.unarchive(path);
+                        }
+                    }
+                }
+
+                if (key == 3) {
+                    System.out.println("\nProcessing encryption...");
+                    System.out.println("""
+                            What exactly do you need:\s
+                            Encrypt - 1;
+                            Decrypt - 2;
+                            Get back - 3.""");
+
+                    key = in.nextInt();
+
+                    if(key == 3)
+                        break;
+
+                    if(key == 1) {
+                        System.out.println("Enter path to a file you want to encrypt: ");
+                        path = in.next();
+                        CipherFileEncoder.encryptFile(encKey, new File(path));
+                    }
+
+                    if(key == 2) {
+                        System.out.println("Enter path to a file you want to decrypt: ");
+                        path = in.next();
+                        CipherFileEncoder.decryptFile(encKey, new File(path));
+                    }
+                }
+            }
+        }
     }
 }

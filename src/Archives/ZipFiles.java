@@ -5,7 +5,7 @@ import java.util.zip.*;
 
 public class ZipFiles {
 
-    public void write_to_zip(String filename) {
+    public void archive(String filename) {
         String zipname = filename.replace("txt", "zip");
 
         try(ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(zipname));
@@ -19,6 +19,7 @@ public class ZipFiles {
 
             zos.write(buffer);
 
+            System.out.println("Archivation was finished successfully, check " + filename);
             zos.closeEntry();
         }
         catch(Exception e) {
@@ -26,20 +27,16 @@ public class ZipFiles {
         }
     }
 
-    public void read_from_zip(String path){
+    public void unarchive(String path){
 
         try(ZipInputStream zis = new ZipInputStream(new FileInputStream(path)))
         {
             ZipEntry entry;
             String name;
-            long size;
 
             while((entry = zis.getNextEntry()) != null){
 
                 name = entry.getName();
-                size = entry.getSize();
-
-                System.out.printf("File name: %s \t File size: %d \n", name, size);
 
                 FileOutputStream fout = new FileOutputStream(name);
 

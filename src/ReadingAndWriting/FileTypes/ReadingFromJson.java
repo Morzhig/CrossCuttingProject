@@ -1,5 +1,6 @@
-package ReadingAndWriting;
+package ReadingAndWriting.FileTypes;
 
+import ReadingAndWriting.Interfaces.ReadingAndWriting;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
@@ -7,12 +8,10 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class ReadingFromJson {
-    String result;
+public class ReadingFromJson implements ReadingAndWriting {
+    public String result = "";
 
-    public ReadingFromJson(){
-        result = "";
-    }
+    @Override
     public void read(String file_name) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(file_name));
 
@@ -20,11 +19,13 @@ public class ReadingFromJson {
 
         br.close();
     }
-    public void write(String file_name) throws IOException {
+
+    @Override
+    public void write(String file_name, String text) throws IOException {
 
         FileWriter fw = new FileWriter(file_name);
 
-        fw.write(new Gson().toJson(result));
+        fw.write(new Gson().toJson(text));
 
         fw.close();
     }

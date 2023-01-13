@@ -1,15 +1,30 @@
 package Tests.Archives;
 
-import static org.junit.jupiter.api.Assertions.*;
+import Archives.ZipFiles;
+import ReadingAndWriting.FileTypes.ReadingFromTxt;
+import org.junit.jupiter.api.Test;
+
+import java.io.File;
+import java.io.IOException;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ZipFilesTest {
+    @Test
+    public void ZipArchives_Test() throws IOException {
+        String test = "Zip archive.";
 
-    @org.junit.jupiter.api.Test
-    void write_to_zip_Test() {
+        new ReadingFromTxt().write("result.txt", test);
 
-    }
+        new ZipFiles().archive("result.txt");
+        new ZipFiles().unarchive("result.zip");
 
-    @org.junit.jupiter.api.Test
-    void read_from_zip_Test() {
+        ReadingFromTxt res = new ReadingFromTxt();
+        res.read("result.txt");
+
+        new File("result.txt").delete();
+        new File("result.zip").delete();
+
+        assertEquals(test, res.result);
     }
 }

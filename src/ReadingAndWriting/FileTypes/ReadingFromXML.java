@@ -1,28 +1,23 @@
-package ReadingAndWriting;
+package ReadingAndWriting.FileTypes;
 
+import ReadingAndWriting.Interfaces.ReadingAndWriting;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.stream.XMLStreamException;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.*;
-import java.security.GeneralSecurityException;
-import java.security.Key;
 
-public class ReadingFromXML {
-    String result;
+public class ReadingFromXML implements ReadingAndWriting {
+    public String result = "";
 
-    public ReadingFromXML(){
-        result = "";
-    }
+    @Override
     public void read (String FileName) throws IOException, ParserConfigurationException, SAXException {
         File inputFile = new File(FileName);
 
@@ -47,7 +42,9 @@ public class ReadingFromXML {
 
         result = result.strip();
     }
-    public void write(String path) throws ParserConfigurationException, IOException, TransformerException {
+
+    @Override
+    public void write(String path, String text) throws ParserConfigurationException, IOException, TransformerException {
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         DocumentBuilder db = dbf.newDocumentBuilder();
 
@@ -58,7 +55,7 @@ public class ReadingFromXML {
 
         root.appendChild(user);
         doc.appendChild(root);
-        user.appendChild(doc.createTextNode(result));
+        user.appendChild(doc.createTextNode(text));
 
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
         Transformer transformer = transformerFactory.newTransformer();
@@ -70,7 +67,7 @@ public class ReadingFromXML {
         transformer.transform(source, result);
     }
 
-    private File mkdirFiles(String filePath) throws IOException {
+    private File mkdirFiles(String filePath) {
         return new File(filePath);
     }
 }
