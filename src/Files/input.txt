@@ -1,3 +1,1 @@
-just testing here
-some features nearly added
-fffafafqaf
+Checking if TXT reader and writer work.

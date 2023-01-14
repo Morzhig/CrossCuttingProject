@@ -1,4 +1,5 @@
 import Archives.ZipFiles;
+import Encryption.CipherEncoder;
 import Encryption.CipherFileEncoder;
 import ReadingAndWriting.FileTypes.ReadingFromJson;
 import ReadingAndWriting.FileTypes.ReadingFromTxt;
@@ -29,13 +30,14 @@ public class Main {
             System.out.println("""
                     Here are some features for you to see:
                     Reading and writing files - 1;
-                    Archiving and unarchiving zip files - 2;
-                    Encrypting and decrypting files - 3;
-                    Leave - 4.""");
+                    Archiving and dearchiving zip files - 2;
+                    Encrypting and decrypting strings - 3;
+                    Encrypting and decrypting files - 4;
+                    Leave - 5.""");
 
             key = in.nextInt();
 
-            if (key == 4)
+            if (key == 5)
                 break;
 
             if (key == 1) {
@@ -89,61 +91,90 @@ public class Main {
                         rfXML.write(XMLOutputFileName, in.next());
                     }
                 }
+            }
 
-                if (key == 2) {
-                    while (true) {
-                        System.out.println("\nProcessing Zip-archiving...");
-                        System.out.println("""
-                                What exactly do you need:\s
-                                Archive - 1;
-                                Dearchive - 2;
-                                Get back - 3.""");
-
-                        key = in.nextInt();
-
-                        if (key == 3)
-                            break;
-
-                        ZipFiles zf = new ZipFiles();
-
-                        if (key == 1) {
-                            System.out.println("Enter path to a file you want to archive: ");
-                            path = in.next();
-                            zf.archive(path);
-                        }
-
-                        if (key == 2) {
-                            System.out.println("Enter path to a file you want to unarchive: ");
-                            path = in.next();
-                            zf.unarchive(path);
-                        }
-                    }
-                }
-
-                if (key == 3) {
-                    System.out.println("\nProcessing encryption...");
+            if (key == 2) {
+                while (true) {
+                    System.out.println("\nProcessing Zip-archiving...");
                     System.out.println("""
                             What exactly do you need:\s
-                            Encrypt - 1;
-                            Decrypt - 2;
+                            Archive - 1;
+                            Dearchive - 2;
                             Get back - 3.""");
 
                     key = in.nextInt();
 
-                    if(key == 3)
+                    if (key == 3)
                         break;
 
-                    if(key == 1) {
-                        System.out.println("Enter path to a file you want to encrypt: ");
+                    ZipFiles zf = new ZipFiles();
+
+                    if (key == 1) {
+                        System.out.println("Enter path to a file you want to archive: ");
                         path = in.next();
-                        CipherFileEncoder.encryptFile(encKey, new File(path));
+                        zf.archive(path);
                     }
 
-                    if(key == 2) {
-                        System.out.println("Enter path to a file you want to decrypt: ");
+                    if (key == 2) {
+                        System.out.println("Enter path to a file you want to unarchive: ");
                         path = in.next();
-                        CipherFileEncoder.decryptFile(encKey, new File(path));
+                        zf.unarchive(path);
                     }
+                }
+            }
+
+            if (key == 3) {
+                System.out.println("\nProcessing encryption...");
+
+                System.out.println("""
+                        What exactly do you need:\s
+                        Encrypt - 1;
+                        Decrypt - 2;
+                        Get back - 3.""");
+
+                key = in.nextInt();
+
+                if (key == 3)
+                    break;
+
+                String str;
+
+                if (key == 1) {
+                    System.out.println("Enter string you want to encrypt: ");
+                    str = in.next();
+                    System.out.println("Your encrypted string is: " + CipherEncoder.encrypt(encKey, str) + "\n");
+                }
+
+                if (key == 2) {
+                    System.out.println("Enter string you want to decrypt: ");
+                    str = in.next();
+                    System.out.println("Your decrypted string is: " + CipherEncoder.decrypt(encKey, str) + "\n");
+                }
+            }
+
+            if (key == 4) {
+                System.out.println("\nProcessing file encryption...");
+                System.out.println("""
+                        What exactly do you need:\s
+                        Encrypt - 1;
+                        Decrypt - 2;
+                        Get back - 3.""");
+
+                key = in.nextInt();
+
+                if (key == 3)
+                    break;
+
+                if (key == 1) {
+                    System.out.println("Enter path to a file you want to encrypt: ");
+                    path = in.next();
+                    CipherFileEncoder.encryptFile(encKey, new File(path));
+                }
+
+                if (key == 2) {
+                    System.out.println("Enter path to a file you want to decrypt: ");
+                    path = in.next();
+                    CipherFileEncoder.decryptFile(encKey, new File(path));
                 }
             }
         }

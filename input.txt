@@ -1,1 +1,0 @@
-Checking if TXT reader and writer work.
