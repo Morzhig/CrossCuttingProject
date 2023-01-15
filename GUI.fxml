@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" centerShape="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.GUIController">
+    <children>
+      <MenuButton fx:id="Archiving" layoutX="75.0" layoutY="150.0" mnemonicParsing="false" prefWidth="150.0" text="Archiving" >
+        <items>
+            <MenuItem mnemonicParsing="false" text="Archive" />
+            <MenuItem mnemonicParsing="false" text="Unarchive" />
+        </items>
+    </MenuButton>
+
+      <MenuButton fx:id="Encryption" layoutX="75.0" layoutY="200.0" mnemonicParsing="false" prefWidth="150.0" text="Encryption">
+        <items>
+            <MenuItem mnemonicParsing="false" text="Encrypt" />
+            <MenuItem mnemonicParsing="false" text="Decrypt" />
+        </items>
+    </MenuButton>
+
+      <MenuButton fx:id="ReadAndWrite" layoutX="75.0" layoutY="100.0" mnemonicParsing="false" prefWidth="150.0" text="Read and Write">
+        <items>
+          <MenuItem mnemonicParsing="false" text="Txt" />
+          <MenuItem mnemonicParsing="false" text="Json" />
+            <MenuItem mnemonicParsing="false" text="XML" />
+        </items>
+      </MenuButton>
+    </children>
+</AnchorPane>
