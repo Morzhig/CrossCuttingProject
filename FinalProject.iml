@@ -61,6 +61,8 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="lib2" level="project" />
+    <orderEntry type="library" name="javafx-sdk-19" level="project" />
+    <orderEntry type="library" name="lib" level="project" />
+    <orderEntry type="library" name="junit-4.13.2" level="project" />
   </component>
 </module>

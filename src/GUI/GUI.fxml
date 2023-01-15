@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" centerShape="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.GUIController">
+    <children>
+      <MenuButton fx:id="Archiving" layoutX="75.0" layoutY="200.0" mnemonicParsing="false" prefWidth="150.0" text="Archiving">
+        <items>
+            <MenuItem fx:id="Archive" mnemonicParsing="false" onAction="#ArchiveMethod" text="Archive" />
+            <MenuItem fx:id="Unarchive" mnemonicParsing="false" onAction="#UnarchiveMethod" text="Unarchive" />
+        </items>
+    </MenuButton>
+
+      <MenuButton fx:id="Encryption" layoutX="10.0" layoutY="150.0" mnemonicParsing="false" prefWidth="125.0" text="File Encryption">
+        <items>
+            <MenuItem fx:id="Encrypt" mnemonicParsing="false" onAction="#EncryptMethod" text="Encrypt" />
+            <MenuItem fx:id="Decrypt" mnemonicParsing="false" onAction="#DecryptMethod" text="Decrypt" />
+        </items>
+    </MenuButton>
+
+      <MenuButton fx:id="Reading" layoutX="10.0" layoutY="100.0" mnemonicParsing="false" prefWidth="125.0" text="Read">
+        <items>
+          <MenuItem fx:id="TxtR" mnemonicParsing="false" onAction="#TxtRead" text="Txt" />
+          <MenuItem fx:id="JsonR" mnemonicParsing="false" onAction="#JsonRead" text="Json" />
+            <MenuItem fx:id="XMLR" mnemonicParsing="false" onAction="#XMLRead" text="XML" />
+        </items>
+      </MenuButton>
+
+        <MenuButton fx:id="Writing" layoutX="165.0" layoutY="100.0" mnemonicParsing="false" prefWidth="125.0" text="Write">
+            <items>
+                <MenuItem fx:id="TxtW" mnemonicParsing="false" onAction="#TxtWrite" text="Txt" />
+                <MenuItem fx:id="JsonW" mnemonicParsing="false" onAction="#JsonWrite" text="Json" />
+                <MenuItem fx:id="XMLW" mnemonicParsing="false" onAction="#XMLWrite" text="XML" />
+            </items>
+        </MenuButton>
+
+        <MenuButton fx:id="EncryptionS" layoutX="165.0" layoutY="150.0" mnemonicParsing="false" prefWidth="125.0" text="String Ecnryption">
+            <items>
+                <MenuItem fx:id="EncryptS" mnemonicParsing="false" onAction="#EncryptString" text="Encrypt" />
+                <MenuItem fx:id="DecryptS" mnemonicParsing="false" onAction="#DecryptString" text="Decrypt" />
+            </items>
+        </MenuButton>
+      <Label layoutX="110.0" layoutY="20.0" text="Welcome">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="75.0" layoutY="50.0" text="Cross-Cutting Project">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="140.0" layoutY="235.0" text="by Karpovich Artem (6th group)">
+         <font>
+            <Font name="Arial Bold Italic" size="10.0" />
+         </font>
+      </Label>
+    </children>
+</AnchorPane>
